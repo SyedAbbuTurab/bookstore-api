@@ -2,9 +2,12 @@
 const express = require("express")
 const router = express.Router();
 
-const { getAllBooks, getBookById } = require("../controllers/bookController")
+const { getAllBooks, getBookById, createBook} = require("../controllers/bookController")
 
-router.get('/', getAllBooks) ;   
-router.get('/:id', getBookById) ;   
+router.get('/all', getAllBooks);   
+router.get('/:id', getBookById);
+router.post('/create-book', createBook);
+   
+
 
 module.exports = router
