@@ -8,7 +8,8 @@ exports.getAllBooks = (req, res) => {
 }
 
 exports.getBookById = (req, res) => {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
+    
     const book = books.find(b => b.id === id)
 
     book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
