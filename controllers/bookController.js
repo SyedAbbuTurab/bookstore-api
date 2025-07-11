@@ -31,16 +31,14 @@ exports.createBook = (req, res) => {
 }
 
 exports.deleteBook = (req, res) => {
-    try {
-        const id  = req.params.id;
-        const {id2 } = req.params.id;
-        console.log(id);
-        console.log(id2);
-        
+  try {
+    const id = req.params.id;
+    console.log("Deleting book with ID:", id);
 
-        books = books.filter(b => b.id !== id)
-        res.json({ message: "Book Deleted!" })
-    } catch (error) {
-        res.status(400).json({ message: "Something went wrong in deletion", error})
-    }
-}
+    books = books.filter(b => b.id !== id);
+
+    res.json({ message: "Book Deleted!" });
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong in deletion", error });
+  }
+};
