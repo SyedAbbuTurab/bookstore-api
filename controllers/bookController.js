@@ -39,6 +39,6 @@ exports.deleteBook = (req, res) => {
 
     res.json({ message: "Book Deleted!" });
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong in deletion", error });
+    res.status(400).json({ message: "Something went wrong in deletion", error: error });
   }
 };
