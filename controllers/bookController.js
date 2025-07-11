@@ -10,7 +10,7 @@ exports.getAllBooks = (req, res) => {
 }
 
 exports.getBookById = (req, res) => {
-    
+
     const id = parseInt(req.params.id);
 
     const book = books.find(b => b.id === id)
@@ -26,6 +26,16 @@ exports.createBook = (req, res) => {
         author: author
     }
     books.push(newBook);
-    
+
     res.status(201).json(books)
+}
+
+exports.deleteBook = (req, res) => {
+    try {
+        const { id } = req.params;
+        const book = books.filter(b => b.id !== id)
+        res.json({ message: "Book Deleted!" })
+    } catch (error) {
+        res.status(400).json({message : "Something went wrong in deletion"})
+    }
 }
