@@ -1,8 +1,8 @@
 const { v4, uuid } = require("uuidv4");
 
 var books = [
-    { id: 1, title: "1984", author: "George Orwell" },
-    { id: 2, title: "The Alchemist", author: "Paulo Coelho" },
+    { id: "1", title: "1984", author: "George Orwell" },
+    { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
 ];
 
 exports.getAllBooks = (req, res) => {
@@ -11,7 +11,7 @@ exports.getAllBooks = (req, res) => {
 
 exports.getBookById = (req, res) => {
 
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
 
     const book = books.find(b => b.id === id)
 
@@ -32,10 +32,13 @@ exports.createBook = (req, res) => {
 
 exports.deleteBook = (req, res) => {
     try {
-        const { id } = req.params;
-        const book = books.filter(b => b.id !== id)
+        const id  = parseInt(req.params.id);
+        console.log(id);
+        
+
+        books = books.filter(b => b.id !== id)
         res.json({ message: "Book Deleted!" })
     } catch (error) {
-        res.status(400).json({message : "Something went wrong in deletion"})
+        res.status(400).json({ message: "Something went wrong in deletion" })
     }
 }
