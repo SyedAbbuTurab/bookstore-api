@@ -7,7 +7,7 @@ const { getAllBooks, getBookById, createBook, deleteBook} = require("../controll
 router.get('/all', getAllBooks);   
 router.get('/:id', getBookById);
 router.post('/create-book', createBook);
-router.delete('/:d', deleteBook);
+router.delete('/:id', deleteBook);
    
 
 
