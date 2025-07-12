@@ -1,33 +1,37 @@
 const { v4, uuid } = require("uuidv4");
 
 var books = [
-    { id: "1", title: "1984", author: "George Orwell" },
-    { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
+  { id: "1", title: "1984", author: "George Orwell" },
+  { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
 ];
 
 exports.getAllBooks = (req, res) => {
-    res.json(books)
+  res.json(books)
 }
 
 exports.getBookById = (req, res) => {
 
-    const id = req.params.id;
+  const id = req.params.id;
 
-    const book = books.find(b => b.id === id)
+  const book = books.find(b => b.id === id)
 
-    book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
+  book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
 }
 
 exports.createBook = (req, res) => {
+  try {
     const { title, author } = req.body;
     const newBook = {
-        id: uuid(),
-        title: title,
-        author: author
+      id: uuid(),
+      title: title,
+      author: author
     }
     books.push(newBook);
 
     res.status(201).json(books)
+  } catch (error) {
+
+  }
 }
 
 exports.deleteBook = (req, res) => {
