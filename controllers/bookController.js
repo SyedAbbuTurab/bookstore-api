@@ -10,12 +10,15 @@ exports.getAllBooks = (req, res) => {
 }
 
 exports.getBookById = (req, res) => {
-
-  const id = req.params.id;
-
-  const book = books.find(b => b.id === id)
-
-  book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
+  try {    
+    const id = req.params.id;
+  
+    const book = books.find(b => b.id === id)
+  
+    book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong in fetching books!", error: error });
+  }
 }
 
 exports.createBook = (req, res) => {
