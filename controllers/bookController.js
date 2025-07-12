@@ -1,4 +1,4 @@
-const { v4, uuid } = require("uuidv4");
+const { uuid } = require("uuidv4");
 
 var books = [
   { id: "1", title: "1984", author: "George Orwell" },
