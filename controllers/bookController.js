@@ -30,7 +30,7 @@ exports.createBook = (req, res) => {
 
     res.status(201).json(books)
   } catch (error) {
-
+    res.status(400).json({ message: "Something went wrong in book creation", error: error });
   }
 }
 
