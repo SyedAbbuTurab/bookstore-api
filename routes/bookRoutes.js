@@ -1,12 +1,14 @@
 // const router = require("router")
 const express = require("express")
 const router = express.Router();
+const { bookValidationRoutes } = require("../validators/bookValidator");
+const { validationRequest } = require("../middleware/validateRequest")
 
 const { getAllBooks, getBookById, createBook, deleteBook} = require("../controllers/bookController")
 
 router.get('/all', getAllBooks);   
 router.get('/:id', getBookById);
-router.post('/create-book', createBook);
+router.post('/create-book', bookValidationRoutes, validationRequest, createBook);
 router.delete('/:id', deleteBook);
    
 
