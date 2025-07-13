@@ -1,10 +1,11 @@
 // const router = require("router")
 const express = require("express")
 const router = express.Router();
+const { getAllBooks, getBookById, createBook, deleteBook} = require("../controllers/bookController");
+
 const { bookValidationRoutes } = require("../validators/bookValidator");
 const { validationRequest } = require("../middleware/validateRequest")
 
-const { getAllBooks, getBookById, createBook, deleteBook} = require("../controllers/bookController")
 
 router.get('/all', getAllBooks);   
 router.get('/:id', getBookById);
