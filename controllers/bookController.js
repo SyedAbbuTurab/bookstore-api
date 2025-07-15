@@ -47,12 +47,16 @@ exports.createBook = (req, res) => {
 
 exports.deleteBook = (req, res) => {
   try {
+    const books = readBooksFromFile();
     const id = req.params.id;
-    console.log("Deleting book with ID:", id);
 
-    books = books.filter(b => b.id !== id);
+    
+    const updatedBooks = books.filter(b => b.id !== id);
 
-    res.json({ message: "Book Deleted!" });
+    writeBooksFromFile(updatedBooks);
+
+    res.json({ message: "Book Deleted!", data: updatedBooks});
+    
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in deletion", error: error });
   }
