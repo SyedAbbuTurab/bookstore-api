@@ -44,9 +44,35 @@ exports.createBook = (req, res) => {
     writeBooksFromFile(books);
 
     res.status(201).json(books);
-    
+
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in book creation", error: error });
+  }
+}
+
+exports.updateBook = (req, res) => {
+  try {
+    const books = readBooksFromFile();
+    const id = req.params.id;
+    const index = books.findIndex(b => b.id === id);
+    console.log("index", index);
+    
+
+    if(index == -1) {
+      return res.status(404).json({message: "Book not found!!"})
+    };
+
+    const updatedBooks = {
+      ...books[index],
+      title: req.body.title || books[index].title,
+      author: req.body.author || books[index].author,
+    }
+    books[index] = updatedBooks
+    writeBooksFromFile(books);
+    res.json(updatedBooks)
+
+  } catch (error) {
+    res.status(400).json({message:"Something went wrong in book creation", error: error.message})
   }
 }
 
