@@ -8,8 +8,8 @@ const {readBooksFromFile, writeBooksFromFile} = require("../utils/helper")
 
 exports.getAllBooks = (req, res) => {
   try {
-    const data = readBooksFromFile();
-    res.json(data)
+    const books = readBooksFromFile();
+    res.json(books)
   } catch (error) {
     res.json(error)
   }
@@ -17,11 +17,13 @@ exports.getAllBooks = (req, res) => {
 
 exports.getBookById = (req, res) => {
   try {    
+    const books = readBooksFromFile();
+
     const id = req.params.id;
   
     const book = books.find(b => b.id === id)
-  
-    book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" })
+    book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" });
+
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in fetching books!", error: error });
   }
@@ -36,10 +38,13 @@ exports.createBook = (req, res) => {
       id: uuid(),
       title: title,
       author: author
-    }
+    };
+
     books.push(newBook);
-    writeBooksFromFile(books)
-    res.status(201).json(books)
+    writeBooksFromFile(books);
+
+    res.status(201).json(books);
+    
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in book creation", error: error });
   }
@@ -56,7 +61,7 @@ exports.deleteBook = (req, res) => {
     writeBooksFromFile(updatedBooks);
 
     res.json({ message: "Book Deleted!", data: updatedBooks});
-    
+
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in deletion", error: error });
   }
