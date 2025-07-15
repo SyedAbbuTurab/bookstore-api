@@ -1,10 +1,10 @@
 const { uuid } = require("uuidv4");
 const {readBooksFromFile, writeBooksFromFile} = require("../utils/helper")
 
-var books = [
-  { id: "1", title: "1984", author: "George Orwell" },
-  { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
-];
+// var books = [
+//   { id: "1", title: "1984", author: "George Orwell" },
+//   { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
+// ];
 
 exports.getAllBooks = (req, res) => {
   try {
@@ -29,6 +29,8 @@ exports.getBookById = (req, res) => {
 
 exports.createBook = (req, res) => {
   try {
+    const books = readBooksFromFile();
+
     const { title, author } = req.body;
     const newBook = {
       id: uuid(),
@@ -36,7 +38,7 @@ exports.createBook = (req, res) => {
       author: author
     }
     books.push(newBook);
-
+    writeBooksFromFile(books)
     res.status(201).json(books)
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in book creation", error: error });
