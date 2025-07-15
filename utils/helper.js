@@ -7,3 +7,7 @@ function readBooksFromFile() {
     const data = fs.readFileSync(booksFile, 'utf-8');
     return JSON.parse(data);
 }
+
+function writeBooksFromFile(data) {
+    fs.writeFileSync(booksFile, JSON.stringify(data, null, 2));
+}
