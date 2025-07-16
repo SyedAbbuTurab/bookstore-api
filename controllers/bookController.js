@@ -41,12 +41,12 @@ exports.getBookById = (req, res) => {
   }
 }
 
-exports.createBook = async(req, res) => {
+exports.createBook = async (req, res) => {
   try {
-    
+
     const { title, author } = req.body;
-    
-    const newBook = await Book.create({title, author}) 
+
+    const newBook = await Book.create({ title, author })
 
     res.status(201).json(newBook);
 
@@ -55,43 +55,36 @@ exports.createBook = async(req, res) => {
   }
 }
 
-exports.updateBook = (req, res) => {
+exports.updateBook = async (req, res) => {
   try {
-    const books = readBooksFromFile();
     const id = req.params.id;
-    const index = books.findIndex(b => b.id === id);
-    console.log("index", index);
 
+    const checkBook = await Book.findOne({ _id: id })
 
-    if (index == -1) {
+    if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    const updatedBooks = {
-      ...books[index],
-      title: req.body.title || books[index].title,
-      author: req.body.author || books[index].author,
-    }
-    books[index] = updatedBooks
-    writeBooksFromFile(books);
-    res.json(updatedBooks)
+    await Book.deleteOne({ _id: id })
+    res.json({ message: "Book deleted successfully" })
 
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in book creation", error: error.message })
   }
 }
 
-exports.deleteBook = (req, res) => {
+exports.deleteBook = async(req, res) => {
   try {
-    const books = readBooksFromFile();
     const id = req.params.id;
 
+    const checkBook = await Book.findOne({ _id: id })
 
-    const updatedBooks = books.filter(b => b.id !== id);
+    if (!checkBook) {
+      return res.status(404).json({ message: "Book not found!!" })
+    };
 
-    writeBooksFromFile(updatedBooks);
-
-    res.json({ message: "Book Deleted!", data: updatedBooks });
+    await Book.deleteOne({ _id: id })
+    res.json({ message: "Book deleted successfully" })
 
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in deletion", error: error });
