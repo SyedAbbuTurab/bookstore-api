@@ -21,10 +21,15 @@ exports.getAllBooks = (req, res) => {
       const matchesAuthor = author ? book.author.toLowerCase().includes(author.toLowerCase()) : true
       return matchesTitle && matchesAuthor;
     });
+
     res.json(filteredBooks)
 
+
   } catch (error) {
-    res.json(error)
+    res.status(500).json({
+      message: "Failed to retrieve books",
+      error: error.message
+    });
   }
 }
 
