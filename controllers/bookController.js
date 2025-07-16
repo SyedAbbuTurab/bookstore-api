@@ -12,19 +12,16 @@ exports.getAllBooks = (req, res) => {
 
     const { title, author } = req.query;
 
-    if (!title && !author) {
-      res.json(books)
+    let filteredBooks = books;
+    if (title || author) {
+      filteredBooks = books.filter(book => {
+        const matchesTitle = title ? book.title.toLowerCase().includes(title.toLowerCase()) : true
+        const matchesAuthor = author ? book.author.toLowerCase().includes(author.toLowerCase()) : true
+        return matchesTitle && matchesAuthor;
+      });
     };
 
-    const filteredBooks = books.filter(book => {
-      const matchesTitle = title ? book.title.toLowerCase().includes(title.toLowerCase()) : true
-      const matchesAuthor = author ? book.author.toLowerCase().includes(author.toLowerCase()) : true
-      return matchesTitle && matchesAuthor;
-    });
-
     res.json(filteredBooks)
-
-
   } catch (error) {
     res.status(500).json({
       message: "Failed to retrieve books",
