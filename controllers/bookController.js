@@ -27,15 +27,17 @@ exports.getAllBooks = (req, res) => {
   }
 }
 
-exports.getBookById = (req, res) => {
+exports.getBookById = async(req, res) => {
   try {
-    const books = readBooksFromFile();
-
     const id = req.params.id;
 
-    const book = books.find(b => b.id === id)
-    book ? res.json(book) : res.status(404).json({ message: "Book not found! :(" });
+    const checkBook = await Book.findOne({ _id: id })
 
+    if (!checkBook) {
+      return res.status(404).json({ message: "Book not found!!" })
+    };
+
+    res.json(checkBook)
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in fetching books!", error: error });
   }
