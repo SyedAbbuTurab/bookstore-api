@@ -1,10 +1,6 @@
 const { uuid } = require("uuidv4");
 const { readBooksFromFile, writeBooksFromFile } = require("../utils/helper")
 
-// var books = [
-//   { id: "1", title: "1984", author: "George Orwell" },
-//   { id: "2", title: "The Alchemist", author: "Paulo Coelho" },
-// ];
 
 exports.getAllBooks = (req, res) => {
   try {
