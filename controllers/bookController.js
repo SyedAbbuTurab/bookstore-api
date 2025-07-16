@@ -1,5 +1,6 @@
 const { uuid } = require("uuidv4");
-const { readBooksFromFile, writeBooksFromFile } = require("../utils/helper")
+const { readBooksFromFile, writeBooksFromFile } = require("../utils/helper");
+const Book = require("../models/Book")
 
 
 exports.getAllBooks = (req, res) => {
@@ -40,21 +41,14 @@ exports.getBookById = (req, res) => {
   }
 }
 
-exports.createBook = (req, res) => {
+exports.createBook = async(req, res) => {
   try {
-    const books = readBooksFromFile();
-
+    
     const { title, author } = req.body;
-    const newBook = {
-      id: uuid(),
-      title: title,
-      author: author
-    };
+    
+    const newBook = await Book.create({title, author}) 
 
-    books.push(newBook);
-    writeBooksFromFile(books);
-
-    res.status(201).json(books);
+    res.status(201).json(newBook);
 
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in book creation", error: error });
