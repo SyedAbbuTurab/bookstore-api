@@ -22,7 +22,7 @@ exports.getAllBooks = (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to retrieve books",
-      error: error.message
+      error: error
     });
   }
 }
