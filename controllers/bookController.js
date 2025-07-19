@@ -27,7 +27,7 @@ exports.getAllBooks = (req, res) => {
   }
 }
 
-exports.getBookById = async(req, res) => {
+exports.getBookById = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -61,21 +61,25 @@ exports.updateBook = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ id: id })
+    const book = await Book.findById(id)
 
-    if (!checkBook) {
+    if (!book) {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    await Book.deleteOne({ id: id })
-    res.json({ message: "Book deleted successfully" })
+    book.title = req.body.title || book.title;
+    book.author = req.body.author || book.author;
+
+    const updatedBook = await book.save();
+
+    res.status(200).json(updatedBook);
 
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong in book creation", error: error.message })
+    res.status(400).json({ message: "Something went wrong in book updation", error: error.message })
   }
 }
 
-exports.deleteBook = async(req, res) => {
+exports.deleteBook = async (req, res) => {
   try {
     const id = req.params.id;
 
