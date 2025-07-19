@@ -1,11 +1,9 @@
-const { uuid } = require("uuidv4");
-const { readBooksFromFile, writeBooksFromFile } = require("../utils/helper");
 const Book = require("../models/Book")
 
 
 exports.getAllBooks = async (req, res) => {
   try {
-    
+
     const allBooks = await Book.find();
     return res.json(allBooks)
   } catch (error) {
