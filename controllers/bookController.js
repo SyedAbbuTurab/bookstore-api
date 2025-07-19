@@ -3,22 +3,11 @@ const { readBooksFromFile, writeBooksFromFile } = require("../utils/helper");
 const Book = require("../models/Book")
 
 
-exports.getAllBooks = (req, res) => {
+exports.getAllBooks = async (req, res) => {
   try {
-    const books = readBooksFromFile();
-
-    const { title, author } = req.query;
-
-    let filteredBooks = books;
-    if (title || author) {
-      filteredBooks = books.filter(book => {
-        const matchesTitle = title ? book.title.toLowerCase().includes(title.toLowerCase()) : true
-        const matchesAuthor = author ? book.author.toLowerCase().includes(author.toLowerCase()) : true
-        return matchesTitle && matchesAuthor;
-      });
-    };
-
-    res.json(filteredBooks)
+    
+    const allBooks = await Book.find();
+    return res.json(allBooks)
   } catch (error) {
     res.status(500).json({
       message: "Failed to retrieve books",
