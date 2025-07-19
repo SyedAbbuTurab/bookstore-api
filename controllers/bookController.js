@@ -31,7 +31,7 @@ exports.getBookById = async(req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ _id: id })
+    const checkBook = await Book.findOne({ id: id })
 
     if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
@@ -61,13 +61,13 @@ exports.updateBook = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ _id: id })
+    const checkBook = await Book.findOne({ id: id })
 
     if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    await Book.deleteOne({ _id: id })
+    await Book.deleteOne({ id: id })
     res.json({ message: "Book deleted successfully" })
 
   } catch (error) {
@@ -79,13 +79,13 @@ exports.deleteBook = async(req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ _id: id })
+    const checkBook = await Book.findOne({ id: id })
 
     if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    await Book.deleteOne({ _id: id })
+    await Book.deleteOne({ id: id })
     res.json({ message: "Book deleted successfully" })
 
   } catch (error) {
