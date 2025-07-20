@@ -1,6 +1,6 @@
 const server = require("express");
 const cors = require("cors");
-const bookRoutes = require("./routes/bookRoutes")
+const bookRoutes = require("./routes/bookRoutes");
 const dotEnv = require("dotenv").config();
 
 
