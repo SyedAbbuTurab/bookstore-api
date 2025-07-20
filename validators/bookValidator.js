@@ -5,4 +5,4 @@ exports.bookValidationRoutes = [
         .isLength({ min: 3 }).withMessage("Title must be at leaest 3 characters"),
     body('author').notEmpty().withMessage("author is required!")
         .isAlpha('en-US', { ignore: ' ' }).withMessage("Author name must only contain letters"),
-]
+];
