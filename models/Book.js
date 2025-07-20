@@ -20,4 +20,4 @@ bookSchema.set('toJSON', {
 });
 
 
-module.exports = mongoose.model('Book', bookSchema)
+module.exports = mongoose.model('Book', bookSchema);
