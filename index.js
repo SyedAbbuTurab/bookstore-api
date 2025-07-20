@@ -12,7 +12,7 @@ app.use((req, res, next) => {
     console.log(`${req.url}, ${req.method}`);
     next();
 })
-app.use('/api/books', bookRoutes)
+app.use('/api/books', bookRoutes);
 
 
 module.exports = {
