@@ -14,4 +14,4 @@ function writeBooksFromFile(data) {
 
 module.exports = {
     readBooksFromFile, writeBooksFromFile
-}
+};
