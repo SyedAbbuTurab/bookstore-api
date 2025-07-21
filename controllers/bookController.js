@@ -3,8 +3,16 @@ const Book = require("../models/Book")
 
 exports.getAllBooks = async (req, res) => {
   try {
+    const filters = {};
 
-    const allBooks = await Book.find();
+    // Loop through all query params and add to filters
+    for (let key in req.query) {
+      // Case-insensitive partial match using RegExp
+      filters[key] = { $regex: req.query[key], $options: 'i' };
+    }
+
+
+    const allBooks = await Book.find(filters);
     return res.json(allBooks)
   } catch (error) {
     res.status(500).json({
