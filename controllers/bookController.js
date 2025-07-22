@@ -14,8 +14,24 @@ exports.getAllBooks = async (req, res) => {
       }
     }
 
-    const allBooks = await Book.find(filters);
-    return res.json(allBooks)
+    // Handle pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const [books, totalCount] = await Promise.all([
+      Book.find(filters).skip(skip).limit(limit),
+      Book.countDocuments(filters)
+    ]);
+
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.json({
+      page,
+      totalPages,
+      totalCount,
+      books
+    });
   } catch (error) {
     res.status(500).json({
       message: "Failed to retrieve books",
