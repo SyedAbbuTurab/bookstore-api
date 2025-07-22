@@ -7,10 +7,12 @@ exports.getAllBooks = async (req, res) => {
 
     // Loop through all query params and add to filters
     for (let key in req.query) {
-      // Case-insensitive partial match using RegExp
-      filters[key] = { $regex: req.query[key], $options: 'i' };
+      if (key === 'id') {
+        filters['_id'] = req.query[key]; // exact match for _id
+      } else {
+        filters[key] = { $regex: req.query[key], $options: 'i' }; // partial, case-insensitive
+      }
     }
-
 
     const allBooks = await Book.find(filters);
     return res.json(allBooks)
