@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    DoB: {
+    dob: {
         type: String,
         required: true
     },
