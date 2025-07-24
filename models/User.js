@@ -34,6 +34,22 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+userSchema.pre('save', async function (next) {
+    if(!this.isModified('password')) return next();
+    try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+
+});
+
+userSchema.methods.comparePassword = function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
+
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
     ret.id = ret._id;
@@ -41,16 +57,6 @@ userSchema.set('toJSON', {
     delete ret.__v;
   }
 });
-userSchema.pre('save', async function (next) {
-    if(this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-});
-
-userSchema.methods.comparePassword = function (candidatePassword) {
-    return bcrypt.compare(candidatePassword, this.password);
-};
-
 
 module.exports = mongoose.model('User', userSchema);
 
