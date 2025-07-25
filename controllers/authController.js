@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.signUp = async (req, res) => {
     try {
@@ -29,5 +31,30 @@ exports.signUp = async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({ error: err.message });
+    }
+};
+
+exports.logIn = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ error: "Invalid email or password!" })
+        };
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ error: "Invalid email or password!" })
+        };
+
+        
+
+    } catch (error) {
+        console.error(err);
+        res.status(500).json({ error: 'Login failed' });
+
     }
 }
