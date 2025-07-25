@@ -50,7 +50,20 @@ exports.logIn = async (req, res) => {
             return res.status(400).json({ error: "Invalid email or password!" })
         };
 
-        
+        // Optional check account apporved or not other than user!
+        if (!user.isApproved) {
+            return res.status(403).json({ error: "Account is not approved yet!" })
+        }
+
+        //JWT sign
+        const token = jwt.sign(
+            { id: user.id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.json({ token, role: user.role })
+
 
     } catch (error) {
         console.error(err);
