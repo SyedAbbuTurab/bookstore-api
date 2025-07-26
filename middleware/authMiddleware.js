@@ -25,4 +25,4 @@ const authorizeRoles = (...allowedUsers) => {
         }
     };
     next();
-}
+};
