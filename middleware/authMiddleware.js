@@ -23,5 +23,6 @@ const authorizeRoles = (...allowedUsers) => {
         if (!req.user || !allowedUsers.includes(req.user.role)) {
             return res.status(403).json({ error: 'Access denied' });
         }
-    }
+    };
+    next();
 }
