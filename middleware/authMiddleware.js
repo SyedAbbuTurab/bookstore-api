@@ -26,3 +26,8 @@ const authorizeRoles = (...allowedUsers) => {
     };
     next();
 };
+
+module.exports = {
+    verifyToken,
+    authorizeRoles
+}
