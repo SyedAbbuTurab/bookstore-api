@@ -14,6 +14,6 @@ const verifyToken = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        return res.status(401).json({error: "Access denied."})
+        return res.status(401).json({error: "Access denied."});
     }
-}
+};
