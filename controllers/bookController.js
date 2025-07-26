@@ -58,7 +58,7 @@ exports.getBookById = async (req, res) => {
 
 exports.createBook = async (req, res) => {
   try {
-
+    
     const { title, author } = req.body;
 
     const newBook = await Book.create({ title, author })
