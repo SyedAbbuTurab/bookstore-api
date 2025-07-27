@@ -12,10 +12,11 @@ const inviteSchema = new mongoose.Schema({
     },
     token: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    email: {
-        type: String,
-        required: true
-    },
+    used: {
+        type: Boolean,
+        default: false
+    }
 })
