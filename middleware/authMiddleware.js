@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
     
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         res.status(401).json({ error: "No token provided!" })
-    }
+    };
 
     const token = authHeader.split(' ')[1];
 
