@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
 const authorizeRoles = (...allowedUsers) => {
     return (req, res, next) => {
         if (!req.user || !allowedUsers.includes(req.user.role)) 
-            return res.status(403).json({ error: 'Access denied' });
+            return res.status(403).json({ error: 'Access denied!' });
         next();
     };
 };
