@@ -2,6 +2,8 @@ const express = require('express');
 const { createInvite } = require('../controllers/inviteController');
 const { authorizeRoles, verifyToken } = require('../middleware/authMiddleware')
 
-const route = express.Router();
+const router = express.Router();
 
-route.post('/', verifyToken, authorizeRoles('admin'), createInvite);
+router.post('/', verifyToken, authorizeRoles('admin'), createInvite);
+
+module.exports = router;
