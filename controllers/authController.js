@@ -70,4 +70,8 @@ exports.logIn = async (req, res) => {
         res.status(500).json({ error: 'Login failed' });
 
     }
+};
+
+exports.signupWithInvite = async (req, res) => {
+
 }
