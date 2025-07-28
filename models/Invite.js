@@ -29,7 +29,7 @@ const inviteSchema = new mongoose.Schema({
     }
 });
 
-userSchema.set('toJSON', {
+inviteSchema.set('toJSON', {
   transform: (doc, ret) => {
     ret.id = ret._id;
     delete ret._id;
