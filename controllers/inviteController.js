@@ -1,0 +1,23 @@
+const crypto = require('crypto');
+const Invite = require('../models/Invite');
+const { log } = require('console');
+
+exports.createInvite = async (req, res) => {
+    try {
+        const { email, role } = req.body;
+
+        if (!email || !role) {
+            return res.status(400).json({ error: "Email and Role are required!" })
+        };
+
+        const token = crypto.randomBytes(20).toString('hex');
+
+        const invite = `${process.env.BASE_URL}/signup-invite?token=${token}`;
+        console.log("Invitation Link = ", invite);
+
+        res.status(201).json({ message: "Invite created", inviteLink });
+
+    } catch (error) {
+        res.status(500).json({ error: err.message });
+    }
+}
