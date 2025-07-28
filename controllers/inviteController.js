@@ -1,6 +1,5 @@
 const crypto = require('crypto');
 const Invite = require('../models/Invite');
-const { log } = require('console');
 
 exports.createInvite = async (req, res) => {
     try {
