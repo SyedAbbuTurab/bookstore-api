@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 })
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/invite', authRoutes);
+app.use('/api/invite', inviteRoutes);
 
 
 module.exports = {
