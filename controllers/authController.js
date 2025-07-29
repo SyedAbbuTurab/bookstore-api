@@ -74,5 +74,16 @@ exports.logIn = async (req, res) => {
 };
 
 exports.signupWithInvite = async (req, res) => {
+    try {
+        const { token, firstName, lastName, dob, password } = req.body;
 
+        const invite = await Invite.findOne({ token });
+
+        if (!invite) return res.status(400).jsopn({ message: 'Invalid invite token' });
+        if(!invite.used) return res.status(400).json({message: 'Invite already has been used!'});
+        if(invite.used < Date.now()) return res.json({message:'Invite has expired. :('});
+
+    } catch (error) {
+        console.log(error);
+    }
 }
