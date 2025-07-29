@@ -83,6 +83,22 @@ exports.signupWithInvite = async (req, res) => {
         if(!invite.used) return res.status(400).json({message: 'Invite already has been used!'});
         if(invite.expiresAt < Date.now()) return res.json({message:'Invite has expired. :('});
 
+        // Create user from invite 
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        await User.create({
+            firstName,
+            lastName,
+            email: invite.email,
+            dob,
+            role: invite.role,
+            isApproved: invite.role == 'author' ? false : true, // authors need operator approval
+        });
+
+        invite.used = true;
+        await invite.save();
+
+        
     } catch (error) {
         console.log(error);
     }
