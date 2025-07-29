@@ -80,12 +80,12 @@ exports.signupWithInvite = async (req, res) => {
         const invite = await Invite.findOne({ token });
 
         if (!invite) return res.status(400).jsopn({ message: 'Invalid invite token' });
-        if(!invite.used) return res.status(400).json({message: 'Invite already has been used!'});
-        if(invite.expiresAt < Date.now()) return res.json({message:'Invite has expired. :('});
+        if (!invite.used) return res.status(400).json({ message: 'Invite already has been used!' });
+        if (invite.expiresAt < Date.now()) return res.json({ message: 'Invite has expired. :(' });
 
         // Create user from invite 
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         await User.create({
             firstName,
             lastName,
@@ -98,8 +98,11 @@ exports.signupWithInvite = async (req, res) => {
         invite.used = true;
         await invite.save();
 
-        
+        res.status(201).json({ message: `${invite.role} account created successfully.` });
+
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            message: "Signup failed", error: error.mssage
+        })
     }
 }
