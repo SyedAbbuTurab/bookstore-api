@@ -14,7 +14,6 @@ exports.createInvite = async (req, res) => {
         const invite = await Invite.create({email, role, token});
 
         const inviteLink = `${process.env.BASE_URL}/signup-invite?token=${token}`;
-        console.log("Invitation Link = ", invite);
 
         res.status(201).json({ message: "Invite created", inviteLink });
 
