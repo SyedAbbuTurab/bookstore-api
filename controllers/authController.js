@@ -44,8 +44,9 @@ exports.logIn = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: "Invalid email or password!" })
         };
-
+        
         const isMatch = await bcrypt.compare(password, user.password);
+        
 
         if (!isMatch) {
             return res.status(400).json({ error: "Invalid email or password!" })
@@ -84,14 +85,14 @@ exports.signupWithInvite = async (req, res) => {
         if (invite.expiresAt < Date.now()) return res.json({ message: 'Invite has expired. :(' });
 
         // Create user from invite 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // const hashedPassword = await bcrypt.hash(password, 10);
 
         await User.create({
             firstName,
             lastName,
             email: invite.email,
             dob,
-            password: hashedPassword,
+            password: password,
             role: invite.role,
             isApproved: invite.role == 'author' ? false : true, // authors need operator approval
         });
