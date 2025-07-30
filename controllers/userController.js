@@ -1,9 +1,10 @@
 const User = require('../models/User');
 
-exports.getPendingAuthors = (req, res) => {
+exports.getPendingAuthors = async (req, res) => {
     try {
-        console.log("Authors state");
+        const authors = await User.find({ role: 'author', isApproved: false });
+        res.json(authors);
     } catch (error) {
-        console.log(error);
+        res.status(500).json({ error: 'failed to fetch authors', error: error.message });
     }
 }
