@@ -2,7 +2,8 @@ const server = require("express");
 const cors = require("cors");
 const bookRoutes = require("./routes/bookRoutes");
 const authRoutes = require("./routes/authRoutes");
-const inviteRoutes = require('./routes/inviteRoute')
+const inviteRoutes = require('./routes/inviteRoute');
+const userRoutes = require('./routes/userRoutes')
 const dotEnv = require("dotenv").config();
 
 
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/invite', inviteRoutes);
+app.use('/api/users', userRoutes);
 
 
 module.exports = {
