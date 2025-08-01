@@ -13,7 +13,7 @@ router.get('/all', getAllBooks);
 router.get('/:id', getBookById);
 router.put('/:id', updateBook);
 router.post('/create-book', bookValidationRoutes, validationRequest, verifyToken, authorizeRoles('author'), createBook);
-router.delete('/:id', verifyToken, authorizeRoles('admin', 'operator'), deleteBook);
+router.delete('/:id', verifyToken, authorizeRoles('admin', 'operator', 'author'), deleteBook);
 
 
 module.exports = router
