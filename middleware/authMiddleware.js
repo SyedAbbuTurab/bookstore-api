@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { on } = require("../models/Book");
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;    
