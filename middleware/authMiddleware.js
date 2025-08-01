@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { on } = require("../models/Book");
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;    
@@ -41,5 +42,6 @@ const onlyApprovedAuthors = (req, res) => {
 
 module.exports = {
     verifyToken,
-    authorizeRoles
+    authorizeRoles,
+    onlyApprovedAuthors
 }
