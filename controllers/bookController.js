@@ -58,7 +58,7 @@ exports.getBookById = async (req, res) => {
 
 exports.createBook = async (req, res) => {
   try {
-    
+
     const { title, author } = req.body;
 
     const newBook = await Book.create({ title, author })
@@ -96,7 +96,7 @@ exports.deleteBook = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ id: id })
+    const checkBook = await Book.findOne({ _id: id });
 
     if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
