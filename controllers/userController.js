@@ -9,7 +9,7 @@ exports.getPendingAuthors = async (req, res) => {
     }
 };
 
-//PUT call for updating or approving authors.
+// PUT call for updating or approving authors.
 exports.approveAuthor = async (req, res) => {
     try {
         const { id } = req.body;
@@ -26,5 +26,16 @@ exports.approveAuthor = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: 'Failed to update Author!' })
+    }
+};
+
+// Admin controller to get all user's
+exports.getAllUsers = async (req, res) => {
+    try {
+        const { role } = req.query;
+        const users = role ? await User.find({ role }) : await User.find();
+        res.json({ message: users })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong in fetching users!' })
     }
 }
