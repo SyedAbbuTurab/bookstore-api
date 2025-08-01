@@ -26,6 +26,19 @@ const authorizeRoles = (...allowedUsers) => {
     };
 };
 
+const onlyApprovedAuthors = (req, res) => {
+    const { role, isAppproved } = req.user;
+
+    if(role !== 'author') {
+        return res.status(403).json({ message: 'Only authors can perform this action!'});
+    };
+
+    if(!isAppproved) {
+        return res.status(403).json({ message: 'Auhtor is not yet approved.'});
+    };
+    next()
+}
+
 module.exports = {
     verifyToken,
     authorizeRoles
