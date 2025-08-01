@@ -6,14 +6,14 @@ const { getAllBooks, getBookById, createBook, updateBook, deleteBook } = require
 const { bookValidationRoutes } = require("../validators/bookValidator");
 const { validationRequest } = require("../middleware/validateRequest")
 
-const { verifyToken, authorizeRoles } = require("../middleware/authMiddleware")
+const { verifyToken, authorizeRoles, onlyApprovedAuthors } = require("../middleware/authMiddleware")
 
 
 router.get('/all', getAllBooks);
 router.get('/:id', getBookById);
 router.put('/:id', updateBook);
-router.post('/create-book', bookValidationRoutes, validationRequest, verifyToken, authorizeRoles('author'), createBook);
-router.delete('/:id', verifyToken, authorizeRoles('admin', 'operator', 'author'), deleteBook);
+router.post('/create-book', bookValidationRoutes, validationRequest, verifyToken, authorizeRoles('author'), onlyApprovedAuthors, createBook);
+router.delete('/:id', verifyToken, authorizeRoles('admin', 'operator', 'author'), onlyApprovedAuthors, deleteBook);
 
 
 module.exports = router
