@@ -8,12 +8,12 @@ const { validationRequest } = require("../middleware/validateRequest")
 
 const { verifyToken, authorizeRoles, onlyApprovedAuthors } = require("../middleware/authMiddleware")
 
-
+router.use(verifyToken);
 router.get('/all', getAllBooks);
 router.get('/:id', getBookById);
 router.put('/:id', updateBook);
-router.post('/create-book', bookValidationRoutes, validationRequest, verifyToken, authorizeRoles('author'), onlyApprovedAuthors, createBook);
-router.delete('/:id', verifyToken, authorizeRoles('admin', 'operator', 'author'), onlyApprovedAuthors, deleteBook);
+router.post('/create-book', bookValidationRoutes, validationRequest, authorizeRoles('author'), onlyApprovedAuthors, createBook);
+router.delete('/:id', authorizeRoles('admin', 'operator', 'author'), onlyApprovedAuthors, deleteBook);
 
 
 module.exports = router
