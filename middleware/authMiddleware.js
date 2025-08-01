@@ -43,4 +43,4 @@ module.exports = {
     verifyToken,
     authorizeRoles,
     onlyApprovedAuthors
-}
+};
