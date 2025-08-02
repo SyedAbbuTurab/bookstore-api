@@ -8,3 +8,5 @@ router.use(verifyToken, authorizeRoles('admin'));
 // Admin only route to get user based on role or all users.
 router.get('/admin',  getAllUsers);
 router.delete('/admin/:id', revokeUserPermission);
+
+module.exports = router;
