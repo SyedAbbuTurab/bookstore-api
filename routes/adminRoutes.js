@@ -1,5 +1,6 @@
 const express = require('express');
 const { authorizeRoles, verifyToken } = require('../middleware/authMiddleware');
+const { getAllUsers, revokeUserPermission } = require('../controllers/adminController');
 const router = express.Router();
 
 // All routes below require admin access
