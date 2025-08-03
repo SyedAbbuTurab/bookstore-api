@@ -12,6 +12,6 @@ function writeBooksFromFile(data) {
     fs.writeFileSync(booksFile, JSON.stringify(data, null, 2));
 }
 
-module.exports = {
-    readBooksFromFile, writeBooksFromFile
-};
+// module.exports = {
+//     readBooksFromFile, writeBooksFromFile
+// };
