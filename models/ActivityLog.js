@@ -8,6 +8,13 @@ const activityLogSchema = {
     },
     target: { type: String, required: true },
     targetId: { type: mongoose.Schema.Types.ObjectId },
-    
 
+    meta : {
+        type: Object,
+        default: {}
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
 };
