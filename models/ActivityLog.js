@@ -19,7 +19,7 @@ const activityLogSchema = {
     }
 };
 
-userSchema.set('toJSON', {
+activityLogSchema.set('toJSON', {
   transform: (doc, ret) => {
     ret.id = ret._id;
     delete ret._id;
