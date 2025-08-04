@@ -18,3 +18,5 @@ const activityLogSchema = {
         default: Date.now()
     }
 };
+
+module.exports = mongoose.Model('ActivityLog', activityLogSchema)
