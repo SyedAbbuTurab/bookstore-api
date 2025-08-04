@@ -8,3 +8,6 @@ const logActivity = async ({ action, performedBy, target, targetId, meta = {} })
     }
 };
 
+module.exports ={
+    logActivity
+}
