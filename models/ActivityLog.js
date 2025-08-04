@@ -5,5 +5,9 @@ const activityLogSchema = {
     performedBy: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
-    }
+    },
+    target: { type: String, required: true },
+    targetId: { type: mongoose.Schema.Types.ObjectId },
+    
+
 };
