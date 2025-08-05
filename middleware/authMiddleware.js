@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-    const authHeader = req.headers.authorization;    
-    
+    const authHeader = req.headers.authorization;
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         res.status(401).json({ error: "No token provided!" });
     };
@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);        
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         next();
     } catch (error) {
@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
 
 const authorizeRoles = (...allowedUsers) => {
     return (req, res, next) => {
-        if (!req.user || !allowedUsers.includes(req.user.role)) 
+        if (!req.user || !allowedUsers.includes(req.user.role))
             return res.status(403).json({ error: `Role - Access denied!` });
         next();
     };
@@ -28,13 +28,13 @@ const authorizeRoles = (...allowedUsers) => {
 
 const onlyApprovedAuthors = (req, res, next) => {
     const { role, isApproved } = req.user;
-    
-    if(role !== 'author') {
-        return res.status(403).json({ message: 'Only authors can perform this action!'});
+
+    if (role !== 'author') {
+        return res.status(403).json({ message: 'Only authors can perform this action!' });
     };
 
-    if(!isApproved) {
-        return res.status(403).json({ message: 'Author is not yet approved.'});
+    if (!isApproved) {
+        return res.status(403).json({ message: 'Author is not yet approved.' });
     };
     next();
 }
