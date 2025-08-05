@@ -27,4 +27,4 @@ activityLogSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.Model('ActivityLog', activityLogSchema)
+module.exports = mongoose.model('ActivityLog', activityLogSchema)
