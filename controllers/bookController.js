@@ -1,4 +1,5 @@
-const Book = require("../models/Book")
+const Book = require("../models/Book");
+const { logActivity } = require('../utils/logActivity');
 
 
 exports.getAllBooks = async (req, res) => {
