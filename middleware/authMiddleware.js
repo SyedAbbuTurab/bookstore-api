@@ -34,7 +34,7 @@ const onlyApprovedAuthors = (req, res) => {
     };
 
     if(!isAppproved) {
-        return res.status(403).json({ message: 'Auhtor is not yet approved.'});
+        return res.status(403).json({ message: 'Author is not yet approved.'});
     };
     next();
 }
