@@ -66,7 +66,7 @@ exports.createBook = async (req, res) => {
 
     await logActivity({
       action: 'BOOK_CREATED',
-      performedBy: req.user.role,
+      performedBy: req.user.id,
       target: 'BOOK',
       targetId: newBook.id,
       meta: { title: newBook.title }
