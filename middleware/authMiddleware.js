@@ -26,14 +26,14 @@ const authorizeRoles = (...allowedUsers) => {
     };
 };
 
-const onlyApprovedAuthors = (req, res) => {
-    const { role, isAppproved } = req.user;
-
+const onlyApprovedAuthors = (req, res, next) => {
+    const { role, isApproved } = req.user;
+    
     if(role !== 'author') {
         return res.status(403).json({ message: 'Only authors can perform this action!'});
     };
 
-    if(!isAppproved) {
+    if(!isApproved) {
         return res.status(403).json({ message: 'Author is not yet approved.'});
     };
     next();
