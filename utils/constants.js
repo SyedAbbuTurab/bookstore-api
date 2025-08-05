@@ -1,0 +1,10 @@
+module.exports = {
+  BOOK_CREATED: "BOOK_CREATED",
+  BOOK_UPDATED: "BOOK_UPDATED",
+  BOOK_DELETED: "BOOK_DELETED",
+  
+  INVITE_SENT: "INVITE_SENT",
+  
+  USER_DELETED: "USER_DELETED",
+  USER_APPROVED: "USER_APPROVED", // for author/operator approval
+};
