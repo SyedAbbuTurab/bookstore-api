@@ -62,7 +62,15 @@ exports.createBook = async (req, res) => {
 
     const { title, author } = req.body;
 
-    const newBook = await Book.create({ title, author })
+    const newBook = await Book.create({ title, author });
+
+    await logActivity({
+      action: 'BOOK_CREATED',
+      performedBy: req.user.role,
+      target: 'BOOK',
+      targetId: newBook.id,
+      meta: { title: newBook.title }
+    });
 
     res.status(201).json(newBook);
 
