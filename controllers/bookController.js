@@ -1,4 +1,5 @@
 const Book = require("../models/Book");
+const { BOOK_UPDATED, BOOK_DELETED } = require("../utils/constants");
 const { logActivity } = require('../utils/logActivity');
 
 
@@ -94,6 +95,14 @@ exports.updateBook = async (req, res) => {
 
     const updatedBook = await book.save();
 
+    await logActivity({
+      action: BOOK_UPDATED,
+      performedBy: req.user.id,
+      target: "BOOK",
+      targetId: updatedBook.id,
+      meta:{ title: book.title, author: book.author}
+    });
+
     res.status(200).json(updatedBook);
 
   } catch (error) {
@@ -111,7 +120,16 @@ exports.deleteBook = async (req, res) => {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    await Book.deleteOne({ id: id })
+    await Book.deleteOne({ id: id });
+
+    await logActivity({
+      action: BOOK_DELETED,
+      performedBy: req.user.id,
+      target: "BOOK",
+      targetId: checkBook.id,
+      meta:{ title: checkBook.title, author: checkBook.author}
+    });
+
     res.json({ message: "Book deleted successfully" })
 
   } catch (error) {
