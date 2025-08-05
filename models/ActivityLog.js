@@ -17,7 +17,7 @@ const activityLogSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     }
-});
+}, { timestamps: true });
 
 activityLogSchema.set('toJSON', {
   transform: (doc, ret) => {
