@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const activityLogSchema = {
+const activityLogSchema = new mongoose.Schema({
     action: { type: String, required: true },
     performedBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +17,7 @@ const activityLogSchema = {
         type: Date,
         default: Date.now()
     }
-};
+});
 
 activityLogSchema.set('toJSON', {
   transform: (doc, ret) => {
