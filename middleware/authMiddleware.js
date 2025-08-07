@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
     };
 };
 
+// Functionality would handle or check for role in the req params!
 const authorizeRoles = (...allowedUsers) => {
     return (req, res, next) => {
         if (!req.user || !allowedUsers.includes(req.user.role))
