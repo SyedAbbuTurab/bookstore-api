@@ -100,7 +100,7 @@ exports.updateBook = async (req, res) => {
       performedBy: req.user.id,
       target: "BOOK",
       targetId: updatedBook.id,
-      meta:{ title: book.title, author: book.author}
+      meta: { title: book.title, author: book.author }
     });
 
     res.status(200).json(updatedBook);
@@ -127,7 +127,7 @@ exports.deleteBook = async (req, res) => {
       performedBy: req.user.id,
       target: "BOOK",
       targetId: checkBook.id,
-      meta:{ title: checkBook.title, author: checkBook.author}
+      meta: { title: checkBook.title, author: checkBook.author }
     });
 
     res.json({ message: "Book deleted successfully" })
