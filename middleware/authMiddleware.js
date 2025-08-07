@@ -11,6 +11,7 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     try {
+        // Decoded token would send Role, ID, Approved or Not(For Author & Operator)
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         next();
