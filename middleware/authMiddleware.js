@@ -26,6 +26,7 @@ const authorizeRoles = (...allowedUsers) => {
     };
 };
 
+// This function only for handling approved authors!
 const onlyApprovedAuthors = (req, res, next) => {
     const { role, isApproved } = req.user;
 
