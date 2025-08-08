@@ -23,6 +23,14 @@ exports.approveAuthor = async (req, res) => {
         author.isApproved = true;
         await author.save();
 
+        await logActivity({
+            action: USER_APPROVED,
+            performedBy: req.user.id, // operator
+            target: "User",
+            targetId: author._id,
+            meta: { email: author.email, role: author.role }
+        });
+
         res.json({ message: 'Author approved successfully', author });
 
     } catch (error) {
