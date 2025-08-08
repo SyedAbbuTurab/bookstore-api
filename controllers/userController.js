@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { logActivity } = require("../utils/logActivity");
 
 exports.getPendingAuthors = async (req, res) => {
     try {
