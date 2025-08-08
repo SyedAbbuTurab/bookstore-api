@@ -57,7 +57,7 @@ exports.logIn = async (req, res) => {
             return res.status(403).json({ error: "Account is not approved yet!" })
         }
 
-        //JWT sign
+        //JWT sign with ID, Role, isApprove & Secret
         const token = jwt.sign(
             { id: user.id, role: user.role, isApproved: user.isApproved },
             process.env.JWT_SECRET,
