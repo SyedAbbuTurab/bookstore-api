@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const Invite = require('../models/Invite');
+const { INVITE_SENT } = require('../utils/constants')
 
 exports.createInvite = async (req, res) => {
     try {
@@ -16,6 +17,8 @@ exports.createInvite = async (req, res) => {
         const inviteLink = `${process.env.BASE_URL}/signup-invite?token=${token}`;
 
         res.status(201).json({ message: "Invite created", inviteLink });
+
+        await 
 
     } catch (error) {
         res.status(500).json({ error: err.message });
