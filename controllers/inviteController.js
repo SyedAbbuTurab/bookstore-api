@@ -23,7 +23,7 @@ exports.createInvite = async (req, res) => {
             action: INVITE_SENT,
             performedBy: req.user.id, // admin or operator
             target: "User",
-            meta: { email, role, inviteId: invite._id }
+            meta: { email, role, inviteId: invite.id }
         })
 
     } catch (error) {
