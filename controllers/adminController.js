@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { } = require('../utils/logActivity')
 
 // Admin controller to get all user's
 exports.getAllUsers = async (req, res) => {
