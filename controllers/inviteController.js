@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const Invite = require('../models/Invite');
-const logActivity = require('../utils/logActivity');
+const { logActivity } = require('../utils/logActivity');
 const { INVITE_SENT } = require('../utils/constants');
 
 exports.createInvite = async (req, res) => {
