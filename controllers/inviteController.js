@@ -17,16 +17,15 @@ exports.createInvite = async (req, res) => {
 
         const inviteLink = `${process.env.BASE_URL}/signup-invite?token=${token}`;
 
-        res.status(201).json({ message: "Invite created", inviteLink });
-
         await logActivity({
             action: INVITE_SENT,
             performedBy: req.user.id, // admin or operator
             target: "User",
             meta: { email, role, inviteId: invite.id }
         })
+        res.status(201).json({ message: "Invite created", inviteLink });
 
     } catch (error) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ error: error.message });
     }
 }
