@@ -1,5 +1,6 @@
 const User = require('../models/User');
-const { logActivity } = require('../utils/logActivity')
+const { logActivity } = require('../utils/logActivity');
+const {  } = require('../utils/constants')
 
 // Admin controller to get all user's
 exports.getAllUsers = async (req, res) => {
@@ -21,6 +22,10 @@ exports.revokeUserPermission = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         };
+
+        // await logActivity({
+        //     action:
+        // })
         res.json({ message: 'User deleted successfully.' })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong in deleting user!' })
