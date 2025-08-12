@@ -13,6 +13,7 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+// Revoke or Delete the user iwth permission to add books
 exports.revokeUserPermission = async (req, res) => {
     try {
         const { id } = req.params;
