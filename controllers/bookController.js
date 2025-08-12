@@ -95,6 +95,7 @@ exports.updateBook = async (req, res) => {
 
     const updatedBook = await book.save();
 
+    // Action performed by any user will be logged with certain details and meta data will be stored
     await logActivity({
       action: BOOK_UPDATED,
       performedBy: req.user.id,
