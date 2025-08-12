@@ -17,6 +17,7 @@ exports.createInvite = async (req, res) => {
 
         const inviteLink = `${process.env.BASE_URL}/signup-invite?token=${token}`;
 
+    // Action performed by any user will be logged with certain details and meta data will be stored
         await logActivity({
             action: INVITE_SENT,
             performedBy: req.user.id, // admin or operator
