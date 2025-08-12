@@ -8,6 +8,7 @@ const { validationRequest } = require("../middleware/validateRequest")
 
 const { verifyToken, authorizeRoles, onlyApprovedAuthors } = require("../middleware/authMiddleware")
 
+// Using this all routes under this method will need to have middleware
 router.use(verifyToken);
 router.get('/all', getAllBooks);
 router.get('/:id', getBookById);
