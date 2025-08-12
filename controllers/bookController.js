@@ -64,7 +64,7 @@ exports.createBook = async (req, res) => {
     const { title, author } = req.body;
 
     const newBook = await Book.create({ title, author });
-
+    // Action performed by any user will be logged with certain details and meta data will be stored
     await logActivity({
       action: 'BOOK_CREATED',
       performedBy: req.user.id,
