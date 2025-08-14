@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const { logActivity } = require('../utils/logActivity');
-const { } = require('../utils/constants')
+const constants = require('../utils/constants')
 
 // Admin controller to get all user's
 exports.getAllUsers = async (req, res) => {
@@ -25,7 +25,7 @@ exports.revokeUserPermission = async (req, res) => {
         };
 
         await logActivity({
-            action: USER_DELETED,
+            action: constants.USER_DELETED,
             performedBy: req.user.id, // admin
             target: "Any User",
             targetId: user.id,
