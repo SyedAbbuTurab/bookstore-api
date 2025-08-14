@@ -27,9 +27,9 @@ exports.revokeUserPermission = async (req, res) => {
         await logActivity({
             action: USER_DELETED,
             performedBy: req.user.id, // admin
-            target: "User",
-            targetId: deleted._id,
-            meta: { email: deleted.email, role: deleted.role }
+            target: "Any User",
+            targetId: user.id,
+            meta: { email: user.email, role: user.role }
         });
 
         res.json({ message: 'User deleted successfully.' })
