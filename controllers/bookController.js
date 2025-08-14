@@ -121,7 +121,10 @@ exports.deleteBook = async (req, res) => {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    await Book.deleteOne({ id: id });
+    // await Book.deleteOne({ id: id, $set: { isDeleted: true } });
+    checkBook.isDeleted = true;
+
+    checkBook.save();
 
     await logActivity({
       action: BOOK_DELETED,
@@ -131,7 +134,7 @@ exports.deleteBook = async (req, res) => {
       meta: { title: checkBook.title, author: checkBook.author }
     });
 
-    res.json({ message: "Book deleted successfully" })
+    res.json({ message: "Book soft - deleted successfully" })
 
   } catch (error) {
     res.status(400).json({ message: "Something went wrong in deletion", error: error });
