@@ -5,7 +5,7 @@ const { logActivity } = require('../utils/logActivity');
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const filters = {};
+    const filters = { isDeleted: false };
 
     // Loop through all query params and add to filters
     for (let key in req.query) {
