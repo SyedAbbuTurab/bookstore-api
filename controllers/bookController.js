@@ -46,7 +46,7 @@ exports.getBookById = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const checkBook = await Book.findOne({ id: id })
+    const checkBook = await Book.findOne({ id: id, isDeleted: false })
 
     if (!checkBook) {
       return res.status(404).json({ message: "Book not found!!" })
