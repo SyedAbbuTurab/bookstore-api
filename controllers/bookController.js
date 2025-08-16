@@ -28,6 +28,7 @@ exports.getAllBooks = async (req, res) => {
 
     const totalPages = Math.ceil(totalCount / limit);
 
+    // send response
     res.json({
       page,
       totalPages,
