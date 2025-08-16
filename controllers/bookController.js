@@ -2,7 +2,7 @@ const Book = require("../models/Book");
 const { BOOK_UPDATED, BOOK_DELETED } = require("../utils/constants");
 const { logActivity } = require('../utils/logActivity');
 
-
+// Get all books from DB
 exports.getAllBooks = async (req, res) => {
   try {
     const filters = { isDeleted: false };
