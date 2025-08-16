@@ -83,6 +83,7 @@ exports.createBook = async (req, res) => {
   }
 }
 
+// Update books depending on params
 exports.updateBook = async (req, res) => {
   try {
     const id = req.params.id;
