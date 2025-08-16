@@ -12,7 +12,7 @@ exports.getAllBooks = async (req, res) => {
       if (key === 'id') {
         filters['_id'] = req.query[key]; // exact match for _id
       } else {
-        filters[key] = { $regex: req.query[key], $options: 'i' }; // partial, case-insensitive
+        filters[key] = { $regex: req.query[key], $options: 'i' };
       }
     }
 
