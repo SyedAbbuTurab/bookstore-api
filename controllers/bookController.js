@@ -43,6 +43,7 @@ exports.getAllBooks = async (req, res) => {
   }
 }
 
+// Get books by ID
 exports.getBookById = async (req, res) => {
   try {
     const id = req.params.id;
