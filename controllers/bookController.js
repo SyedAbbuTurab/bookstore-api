@@ -60,6 +60,7 @@ exports.getBookById = async (req, res) => {
   }
 }
 
+// Create resource in books DB
 exports.createBook = async (req, res) => {
   try {
 
