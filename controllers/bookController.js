@@ -125,7 +125,6 @@ exports.deleteBook = async (req, res) => {
       return res.status(404).json({ message: "Book not found!!" })
     };
 
-    // await Book.deleteOne({ id: id, $set: { isDeleted: true } });
     checkBook.isDeleted = true;
 
     checkBook.save();
