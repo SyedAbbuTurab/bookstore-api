@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { logActivity } = require("../utils/logActivity");
 
+// Get all pending approval authors
 exports.getPendingAuthors = async (req, res) => {
     try {
         const authors = await User.find({ role: 'author', isApproved: false });
