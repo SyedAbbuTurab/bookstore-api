@@ -6,3 +6,4 @@ exports.signAccessToken = (user) =>
 
 
 exports.generateRefreshValue = () => crypto.randomBytes(40).toString("hex");
+exports.hash = (v) => crypto.createHash("sha256").update(v).digest("hex");
