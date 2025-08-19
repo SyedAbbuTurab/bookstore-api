@@ -10,6 +10,7 @@ exports.getPendingAuthors = async (req, res) => {
     }
 };
 
+// PUT call for updating or approving authors.
 exports.approveAuthor = async (req, res) => {
     try {
         const { id } = req.body;
