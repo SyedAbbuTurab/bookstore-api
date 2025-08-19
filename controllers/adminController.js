@@ -24,6 +24,7 @@ exports.revokeUserPermission = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         };
 
+        // Logger for revoke permissions for user's
         await logActivity({
             action: constants.USER_DELETED,
             performedBy: req.user.id, // admin
