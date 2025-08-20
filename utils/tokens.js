@@ -8,4 +8,4 @@ exports.signAccessToken = (user) =>
 exports.generateRefreshValue = () => crypto.randomBytes(40).toString("hex");
 exports.hash = (v) => crypto.createHash("sha256").update(v).digest("hex");
 
-exports.refreshExpiryDate = () => new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); 
+exports.refreshExpiryDate = () => new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // 30d
